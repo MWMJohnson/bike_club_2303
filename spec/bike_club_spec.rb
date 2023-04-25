@@ -52,6 +52,40 @@ RSpec.describe BikeClub do
     end
   end
 
+  describe "#best_times(ride)" do 
+    xit " can identify which biker has the fastest time on that ride" do 
+      @biker.learn_terrain!(:gravel)
+      @biker.learn_terrain!(:hills)
+      @biker2.learn_terrain!(:gravel)
+      @biker2.learn_terrain!(:hills)
+
+      @biker.log_ride(@ride1, 92.5)
+      @biker.log_ride(@ride1, 91.1)
+      @biker.log_ride(@ride2, 60.9)
+      @biker.log_ride(@ride2, 61.6)
+
+      @biker2.log_ride(@ride2, 67.0)
+      
+
+      @club1.add_biker(@biker)
+      @club1.add_biker(@biker2)
+
+      
+    end
+  end
+
+  describe "#bikers_eligible(ride)" do 
+    xit " can identify which bikers are eligible for a ride" do 
+      @biker.learn_terrain!(:gravel)
+      @biker.learn_terrain!(:hills)
+
+      @club1.add_biker(@biker)
+      @club1.add_biker(@biker2)
+
+      expect(@club1.bikers_eligible(@ride2)).to eq[@biker]
+    end
+  end
+
 
 end
 
