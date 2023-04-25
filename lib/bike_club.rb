@@ -33,5 +33,18 @@ class BikeClub
     end
     max_biker
   end
+
+  def best_time(ride)
+    
+  end
+
+  def bikers_eligible(ride)
+    eligible_bikers = []
+    @bikers.each do |biker|
+      if biker.acceptable_terrain.include?(ride.terrain) && ride.total_distance <= @max_distance.to_f
+        eligible_bikers << biker
+      end
+    end
+  end
   
 end
