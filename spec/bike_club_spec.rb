@@ -7,23 +7,24 @@ RSpec.describe BikeClub do
     @ride2 = Ride.new({name: "Town Lake", distance: 14.9, loop: true, terrain: :gravel})
     @biker = Biker.new("Kenny", 30)
     @biker2 = Biker.new("Athena", 15)
+    @club1 = BikeClub.new("Denver Beer Co")
   end
 
   describe "#initialize" do 
     it "exists" do 
-      expect(@biker).to be_a(Biker)
+      expect(@club1).to be_a(BikeClub)
     end
 
     it "has readable attributes" do 
-      expect(@biker.name).to eq("Kenny")
-      expect(@biker.max_distance).to eq(30)
-      expect(@biker.rides).to eq({})
-      expect(@biker.acceptable_terrain).to eq([])
+      expect(@club1.name).to eq("Denver Beer Co")
+      expect(@club1.bikers).to eq([])
     end
   end
 
+
+
   describe "#learn_terrain!(terrain)" do 
-    it " can add a new terrain to the list of acceptable terrains" do 
+    xit " can add a new terrain to the list of acceptable terrains" do 
       @biker.learn_terrain!(:gravel)
       @biker.learn_terrain!(:hills)
 
@@ -32,7 +33,7 @@ RSpec.describe BikeClub do
   end
 
   describe "#log_ride(ride, time)" do 
-    it " can document a trail that what biked and the bikers time" do 
+    xit " can document a trail that what biked and the bikers time" do 
       @biker.learn_terrain!(:gravel)
       @biker.learn_terrain!(:hills)
 
@@ -51,7 +52,7 @@ RSpec.describe BikeClub do
   end
 
   describe "#personal_record(ride)" do
-    it " can find the personal record for each biker for each logged trail" do
+    xit " can find the personal record for each biker for each logged trail" do
       @biker.learn_terrain!(:gravel)
       @biker.learn_terrain!(:hills)
 
