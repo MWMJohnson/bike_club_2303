@@ -21,69 +21,37 @@ RSpec.describe BikeClub do
     end
   end
 
-
-
-  describe "#learn_terrain!(terrain)" do 
-    xit " can add a new terrain to the list of acceptable terrains" do 
-      @biker.learn_terrain!(:gravel)
-      @biker.learn_terrain!(:hills)
-
-      expect(@biker.acceptable_terrain).to eq([:gravel, :hills])
+  describe "#add_biker(biker)" do 
+    it " can add a biker to the bike club" do 
+      expect(@club1.bikers).to eq([])
+      expect(@club1.add_biker(@biker)).to eq([@biker])
+      expect(@club1.bikers).to eq([@biker])
     end
   end
 
-  describe "#log_ride(ride, time)" do 
-    xit " can document a trail that what biked and the bikers time" do 
+  describe "#most_rides" do 
+    it " can identify which biker has the most rides" do 
       @biker.learn_terrain!(:gravel)
       @biker.learn_terrain!(:hills)
-
-      @biker.log_ride(@ride1, 92.5)
-      @biker.log_ride(@ride1, 91.1)
-      @biker.log_ride(@ride2, 60.9)
-      @biker.log_ride(@ride2, 61.6)
-
-      expected = ({
-                  @ride1 => [92.5, 91.1],
-                  @ride2 => [60.9, 61.6]
-          })
-
-      expect(@biker.rides).to eq(expected)
-    end
-  end
-
-  describe "#personal_record(ride)" do
-    xit " can find the personal record for each biker for each logged trail" do
-      @biker.learn_terrain!(:gravel)
-      @biker.learn_terrain!(:hills)
-
-      @biker.log_ride(@ride1, 92.5)
-      @biker.log_ride(@ride1, 91.1)
-      @biker.log_ride(@ride2, 60.9)
-      @biker.log_ride(@ride2, 61.6)
-
-      expect(@biker.personal_record(@ride1)).to eq(91.1)
-      expect(@biker.personal_record(@ride2)).to eq(60.9)
-
-      @biker2.log_ride(@ride1, 97.0)
-      @biker2.log_ride(@ride1, 67.0)
-
-      expect(@biker2.rides).to eq({})
-
       @biker2.learn_terrain!(:gravel)
       @biker2.learn_terrain!(:hills)
 
-      @biker2.log_ride(@ride1, 95.0)
-      @biker2.log_ride(@ride2, 65.0)
+      @biker.log_ride(@ride1, 92.5)
+      @biker.log_ride(@ride1, 91.1)
+      @biker.log_ride(@ride2, 60.9)
+      @biker.log_ride(@ride2, 61.6)
 
-      expected = ({
-                  @ride2 => [65]
-          })
+      @biker2.log_ride(@ride2, 67.0)
+      
 
-      expect(@biker2.rides).to eq({@ride2 => [65]})
+      @club1.add_biker(@biker)
+      @club1.add_biker(@biker2)
 
-      expect(@biker2.personal_record(@ride2)).to eq(65.0)
-      expect(@biker2.personal_record(@ride1)).to be(false)
+      expect(@club1.bikers).to eq([@biker, @biker2])
+      expect(@club1.most_rides).to eq(@biker)
     end
   end
 
+
 end
+
